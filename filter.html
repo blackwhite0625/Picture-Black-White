@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>篩選</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="filter.js"></script>
+</head>
+<body>
+  <header>
+    <h1 class="gradient-text">篩選作品</h1>
+  </header>
+  <main>
+    <section>
+      <form>
+        <label for="priceRange">價格範圍: <span id="priceRangeValue">50 TWD</span></label>
+        <input type="range" id="priceRange" name="priceRange" min="50" max="10000" step="50" value="50">
+        
+        <label for="rating">評分範圍: <span id="ratingValue">1 星</span></label>
+        <input type="range" id="rating" name="rating" min="1" max="5" step="1" value="1">
+        
+        <!-- 其他篩選選項 -->
+      </form>
+    </section>
+  </main>
+</body>
+</html>

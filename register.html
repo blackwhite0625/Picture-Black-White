@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>註冊 - PBW 繪圖委託網站</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>註冊</h1>
+    <nav>
+      <a href="index.html" class="nav-button white-button">返回主網站</a>
+    </nav>
+  </header>
+
+  <section id="register-form">
+    <div class="dialog">
+      <form id="register-form-content">
+        <label for="register-email">電子郵件:</label>
+        <input type="email" id="register-email" name="register-email" required>
+
+        <label for="register-username">使用者名稱:</label>
+        <input type="text" id="register-username" name="register-username" required>
+
+        <label for="register-password">密碼:</label>
+        <input type="password" id="register-password" name="register-password" required>
+
+        <label for="confirm-password">確認密碼:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <button type="submit" class="button">註冊</button>
+      </form>
+    </div>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

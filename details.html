@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品詳細資訊 - PBW 繪圖委託網站</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* 嵌入的內部樣式，用於調整圖片和文字 */
+    #artwork-details img {
+      max-width: 60%; /* 確保圖片不超過容器的 60% */
+      height: auto;   /* 保持圖片的高寬比 */
+      display: block; /* 使圖片顯示為塊級元素 */
+      margin: 0 auto; /* 圖片水平居中 */
+    }
+
+    #artwork-details h2 {
+      font-size: 2em; /* 調整標題字體大小 */
+      text-align: center; /* 標題居中 */
+      margin-bottom: 0.5em; /* 標題下方間距 */
+    }
+
+    #artwork-details p {
+      font-size: 1.4em; /* 調整描述字體大小 */
+      margin: 0 1.5em;  /* 左右間距 */
+      text-align: center; /* 描述文字居中 */
+    }
+
+    #artwork-details .price {
+      font-size: 1.6em; /* 調整價格字體大小 */
+      font-weight: bold; /* 使價格文字更醒目 */
+      margin: 0.5em 0; /* 上下間距 */
+      text-align: center; /* 價格文字居中 */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>作品詳細資訊</h1>
+    <nav>
+      <a href="index.html">返回主網站</a>
+    </nav>
+  </header>
+
+  <section>
+    <div id="artwork-details">
+      <!-- 作品詳細資訊會在這裡動態生成 -->
+    </div>
+  </section>
+
+  <script src="scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const artworkDetails = document.getElementById('artwork-details');
+      const urlParams = new URLSearchParams(window.location.search);
+      const index = urlParams.get('id');
+
+      if (index !== null) {
+        const artworks = JSON.parse(localStorage.getItem('artworks')) || [];
+        const artwork = artworks[index];
+
+        if (artwork) {
+          artworkDetails.innerHTML = `
+            <h2>${artwork.title}</h2>
+            <img src="${artwork.imageSrc}" alt="${artwork.title}">
+            <p class="price">價格: ${artwork.priceRange}</p>
+            <p>${artwork.description}</p>
+          `;
+        } else {
+          artworkDetails.innerHTML = `<p>未找到該作品</p>`;
+        }
+      } else {
+        artworkDetails.innerHTML = `<p>無效的作品ID</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

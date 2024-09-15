@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBW繪圖委託</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- 添加 favicon -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  </head>
+  
+<body>
+  <header>
+    <h1>PBW <span class="gradient-text">Picture</span> <span class="black-gradient">Black</span> <span class="white-text">White</span></h1>
+    <p>繪圖委託</p>
+    <nav>
+      <ul>
+        <li id="auth-controls"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <nav class="main-nav">
+    <a href="filter.html" class="nav-button gray-button">篩選</a>
+    <a href="#" id="upload-link" class="nav-button gray-button">上傳作品</a>
+    <a href="#" id="studio-link" class="nav-button gray-button">使用者工作室</a>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="搜尋作品...">
+      <button id="search-button" class="search-button">搜尋</button>
+    </div>
+  </nav>
+  
+  <section id="gallery">
+    <h2>作品展示</h2>
+    <div class="gallery" id="gallery-content">
+      <!-- 作品會在這裡動態生成 -->
+    </div>
+  </section>
+  
+
+  <script src="scripts.js"></script>
+</body>
+</html>

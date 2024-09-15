@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用者工作室 - PBW 繪圖委託網站</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>使用者工作室</h1>
+    <nav>
+      <a href="index.html" class="nav-button white-button">返回主網站</a>
+    </nav>
+  </header>
+
+  <section id="user-gallery">
+    <h2>我的作品</h2>
+    <div class="gallery" id="user-gallery-content">
+      <!-- 使用者上傳的作品會在這裡動態生成 -->
+    </div>
+  </section>
+  
+  <script src="scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const userGalleryContent = document.getElementById('user-gallery-content');
+      const artworks = JSON.parse(localStorage.getItem('artworks')) || [];
+      const loggedInUserEmail = localStorage.getItem('loggedInUser');
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      const loggedInUser = users.find(user => user.email === loggedInUserEmail);
+      const registeredUser = loggedInUser ? loggedInUser.username : null;
+
+      function renderGallery() {
+        userGalleryContent.innerHTML = ''; // 清空畫廊
+
+        artworks.forEach((artwork, index) => {
+          if (artwork.username === registeredUser) { // 僅顯示當前使用者的作品
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+              <a href="details.html?id=${index}">
+                <img src="${artwork.imageSrc}" alt="${artwork.title}">
+                <p>${artwork.title}</p>
+                <p class="price">${artwork.priceRange}</p> <!-- 顯示價格範圍 -->
+              </a>
+              <a href="edit.html?id=${index}" class="edit-button">編輯</a>
+              <a href="#" class="delete-button" data-index="${index}">刪除</a>
+            `;
+            userGalleryContent.appendChild(galleryItem);
+          }
+        });
+
+        // 綁定刪除按鈕的事件
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const index = this.getAttribute('data-index');
+
+            if (confirm('您確定要刪除這件作品嗎？')) {
+              deleteArtwork(index);
+            }
+          });
+        });
+      }
+
+      function deleteArtwork(index) {
+        artworks.splice(index, 1); // 刪除對應作品
+        localStorage.setItem('artworks', JSON.stringify(artworks)); // 更新 localStorage
+        renderGallery(); // 重新渲染畫廊
+      }
+
+      // 初次渲染畫廊
+      renderGallery();
+    });
+  </script>
+</body>
+</html>

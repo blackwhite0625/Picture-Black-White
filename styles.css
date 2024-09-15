@@ -1,0 +1,366 @@
+/* 基本樣式 */ 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+  
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #ffffff, #cccccc);
+}
+  
+h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+  
+.gradient-text {
+    background: linear-gradient(to right, #ff0000, #ff9900, #33cc33, #3399ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+  
+.black-gradient {
+    background: linear-gradient(to right, #000000, #333333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+  
+.white-text {
+    color: #ffffff;
+}
+  
+p {
+    margin: 10px 0;
+    color: #666666;
+}
+  
+/* 主畫面按鈕樣式 */
+.main-nav {
+    text-align: center;
+    margin: 20px;
+}
+  
+.nav-button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+  
+/* 主畫面按鈕顏色 */
+.gray-button {
+    background-color: #cccccc;
+    color: #000000;
+    border: 1px solid #000000;
+}
+  
+.white-button {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+}
+  
+.nav-button:hover {
+    opacity: 0.8;
+}
+  
+/* 搜尋框樣式 */
+/* styles.css */
+.search-container {
+    margin-top: 20px; /* 調整間距 */
+  }
+  
+  #search {
+    width: 200px; /* 調整搜尋框的寬度 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #search-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  
+/* 作品展示樣式 */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;
+}
+  
+.gallery-item {
+    width: calc(20% - 20px); /* 每行顯示5個作品 */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+  
+.gallery-item img {
+    width: 100%;
+    border-radius: 5px;
+}
+  
+.gallery-item p {
+    margin-top: 10px;
+    color: #333333;
+}
+  
+.gallery-item .price {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666666;
+}
+  
+/* 使用者工作室樣式 */
+.edit-button, .delete-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+  
+.edit-button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+  
+.edit-button:hover {
+    background-color: #0056b3;
+}
+  
+.delete-button {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+  
+.delete-button:hover {
+    background-color: #cc0000;
+}
+  
+/* 作品詳細資訊樣式 */
+#artwork-details {
+    text-align: center;
+    margin: 20px;
+}
+  
+#artwork-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+  
+/* 表單樣式 */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+  
+form label {
+    margin: 10px 0 5px;
+}
+  
+form input, form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+  
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 1em;
+    cursor: pointer;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
+  
+/* 適用於篩選頁面 */
+form select, form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+  
+input[type="range"] {
+    width: 100%;
+}
+  
+output {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 1em;
+}
+  
+/* 上傳作品頁面 */
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+  
+#upload-form label {
+    margin-top: 10px;
+    width: 100%;
+}
+  
+#upload-form input[type="file"] {
+    padding: 0;
+    margin-bottom: 10px;
+}
+  
+/* 編輯頁面樣式 */
+textarea {
+    height: 100px;
+}
+  
+/* 適用於註冊和登錄頁面 */
+#register-form, #login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+  
+nav {
+    margin: 20px 0;
+}
+  
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+  
+nav li {
+    display: inline;
+    margin: 0 10px;
+}
+  
+nav a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+  
+/* 按鈕樣式 */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff; /* 白底 */
+    color: #000000; /* 黑字 */
+    border: 2px solid #000000; /* 黑框 */
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px 5px;
+    font-size: 1em;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box; /* 確保內邊距和邊框計算在寬度內 */
+}
+
+/* 按鈕容器 */
+.not-logged-in {
+    max-width: 100%; /* 確保容器最大寬度為父容器的 100% */
+    width: auto; /* 自動調整容器寬度 */
+    margin: 20px auto; /* 自動水平居中 */
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden; /* 確保內容不超出容器 */
+    display: flex; /* 使用 Flexbox */
+    flex-direction: column; /* 垂直排列內容 */
+    align-items: center; /* 水平居中內容 */
+}
+
+.not-logged-in .button {
+    display: block; /* 讓按鈕作為區塊顯示 */
+    padding: 10px 20px;
+    background-color: #ffffff; /* 白底 */
+    color: #000000; /* 黑字 */
+    border: 2px solid #000000; /* 黑框 */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    margin: 10px 0; /* 增加上下邊距 */
+    box-sizing: border-box; /* 確保內邊距和邊框計算在寬度內 */
+    max-width: 100%; /* 按鈕最大寬度為容器的 100% */
+}
+  
+.not-logged-in .button:hover {
+    background-color: #f0f0f0; /* 淺灰底 */
+    color: #333333; /* 深灰字 */
+}
+/* 搜尋結果樣式 */
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.search-result-item {
+    width: calc(20% - 20px); /* 每行顯示5個作品 */
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.search-result-item p {
+    margin-top: 10px;
+    color: #333333;
+}
+
+.search-result-item .price {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666666;
+}
+
+.search-result-item .username {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666666;
+}

@@ -1,0 +1,73 @@
+<!-- 修改 edit.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>編輯作品 - PBW 繪圖委託網站</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>編輯作品</h1>
+    <nav>
+      <a href="studio.html" class="nav-button white-button">返回工作室</a>
+    </nav>
+  </header>
+
+  <section>
+    <form id="edit-form">
+      <label for="title">標題:</label>
+      <input type="text" id="title">
+
+      <label for="file">圖片:</label>
+      <input type="file" id="file">
+
+      <label for="description">描述:</label>
+      <textarea id="description"></textarea>
+
+      <label for="min-price">委託最低價格 (TWD):</label>
+      <input type="number" id="min-price" min="50" max="10000" step="10">
+
+      <label for="max-price">委託最高價格 (TWD):</label>
+      <input type="number" id="max-price" min="50" max="10000" step="10">
+
+      <button type="submit">保存變更</button>
+    </form>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      const artworks = JSON.parse(localStorage.getItem('artworks')) || [];
+      const artwork = artworks[id];
+
+      if (artwork) {
+        document.getElementById('title').value = artwork.title;
+        document.getElementById('description').value = artwork.description;
+        document.getElementById('min-price').value = artwork.priceRange.split(' ~ ')[0];
+        document.getElementById('max-price').value = artwork.priceRange.split(' ~ ')[1].replace(' TWD', '');
+
+        const image = document.createElement('img');
+        image.src = artwork.imageSrc;
+        document.getElementById('file').insertAdjacentElement('beforebegin', image);
+      }
+
+      document.getElementById('edit-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        artwork.title = document.getElementById('title').value;
+        artwork.description = document.getElementById('description').value;
+        artwork.priceRange = `${document.getElementById('min-price').value} ~ ${document.getElementById('max-price').value} TWD`;
+
+        // 更新 localStorage
+        artworks[id] = artwork;
+        localStorage.setItem('artworks', JSON.stringify(artworks));
+
+        window.location.href = 'studio.html';
+      });
+    });
+  </script>
+</body>
+</html>

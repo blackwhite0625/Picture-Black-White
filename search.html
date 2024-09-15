@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜尋結果</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="gradient-text">搜尋結果</h1>
+    </header>
+    <main>
+        <div id="search-results" class="search-results"></div>
+    </main>
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchResultsContainer = document.getElementById('search-results');
+            const searchResults = JSON.parse(localStorage.getItem('searchResults')) || [];
+
+            if (searchResults.length > 0) {
+                searchResults.forEach((result, index) => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('search-result-item');
+                    resultItem.innerHTML = `
+                        <a href="details.html?id=${index}">
+                            <img src="${result.imageSrc}" alt="${result.title}">
+                            <p>${result.title}</p>
+                            <p class="price">價格範圍: ${result.priceRange}</p>
+                            <p class="username">上傳者: ${result.username}</p>
+                        </a>
+                    `;
+                    searchResultsContainer.appendChild(resultItem);
+                });
+            } else {
+                searchResultsContainer.innerHTML = '<p>沒有找到符合的作品。</p>';
+            }
+        });
+    </script>
+</body>
+</html>
