@@ -8,18 +8,25 @@ body {
 }
 
 header {
-    background: #003366; /* 深藍色 */
-    color: #fff;
-    padding: 10px 0;
     text-align: center;
+    padding: 20px;
+    background: linear-gradient(to right, #ffffff, #cccccc);
 }
 
-nav a {
-    color: #fff;
+nav a.nav-button {
+    color: #007bff;
     text-decoration: none;
     font-size: 16px;
     padding: 10px 15px;
     display: inline-block;
+    border: 2px solid #007bff; /* 增加邊框 */
+    border-radius: 5px; /* 邊框圓角 */
+    transition: background 0.3s ease, color 0.3s ease; /* 增加平滑過渡效果 */
+}
+
+nav a.nav-button:hover {
+    background: #007bff; /* 當滑鼠移過時改變背景色 */
+    color: #fff; /* 同時改變文字顏色 */
 }
 
 main {
