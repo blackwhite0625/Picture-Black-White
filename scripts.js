@@ -10,11 +10,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (authControls) {
         if (isLoggedIn) {
-            authControls.innerHTML = '<a href="#" id="logout-btn" class="nav-button white-button">登出</a>';
+            authControls.innerHTML = `
+                <span>歡迎，${loggedInUser.username}</span>
+                <a href="#" id="logout-btn" class="nav-button white-button">登出</a>
+            `;
             if (uploadLink) uploadLink.href = 'upload.html';
             if (studioLink) studioLink.href = 'studio.html';
         } else {
-            authControls.innerHTML = '<a href="login.html" class="nav-button white-button">登錄</a> <a href="register.html" class="nav-button white-button">註冊</a>';
+            authControls.innerHTML = `
+                <a href="login.html" class="nav-button white-button">登錄</a>
+                <a href="register.html" class="nav-button white-button">註冊</a>
+            `;
             if (uploadLink) uploadLink.href = 'not-logged-in.html';
             if (studioLink) studioLink.href = 'not-logged-in.html';
         }
@@ -174,40 +180,51 @@ document.addEventListener('DOMContentLoaded', function () {
             galleryItem.innerHTML = `
                 <a href="details.html?id=${index}">
                     <img src="${artwork.imageSrc}" alt="${artwork.title}">
-                    <p>${artwork.title}</p>
-                    <p class="price">價格範圍: ${artwork.priceRange}</p>
-                    <p class="username">上傳者: ${artwork.username}</p>
+                    <h3>${artwork.title}</h3>
+                    <p>${artwork.priceRange}</p>
+                    <p>作者：${artwork.username}</p>
                 </a>
             `;
+
             galleryContent.appendChild(galleryItem);
         });
-
-        if (!galleryContent.children.length) {
-            galleryContent.innerHTML = `<p>目前沒有作品。</p>`;
-        }
     }
 
     // 搜尋功能
     document.getElementById('search-button')?.addEventListener('click', function () {
-        const query = document.getElementById('search').value.toLowerCase().trim();
-
-        if (!query) {
-            alert('請輸入搜尋關鍵字');
-            return;
-        }
-
-        const artworks = JSON.parse(localStorage.getItem('artworks')) || [];
-
-        const results = artworks.filter(artwork =>
-            artwork.title.toLowerCase().includes(query) || artwork.description.toLowerCase().includes(query)
-        );
-
-        if (results.length > 0) {
-            localStorage.setItem('searchResults', JSON.stringify(results));
-            const searchParams = new URLSearchParams({ query });
-            window.location.href = `search.html?${searchParams.toString()}`;
-        } else {
-            alert('沒有找到符合的作品。');
+        const searchTerm = document.getElementById('search').value.trim();
+        if (searchTerm) {
+            localStorage.setItem('searchTerm', searchTerm);
+            window.location.href = 'search.html'; 
         }
     });
+
+    // 檢查 URL 中是否有搜尋結果
+    if (window.location.pathname.endsWith('search.html')) {
+        const searchTerm = localStorage.getItem('searchTerm');
+        const galleryContent = document.getElementById('gallery-content');
+
+        if (galleryContent && searchTerm) {
+            const artworks = JSON.parse(localStorage.getItem('artworks')) || [];
+            galleryContent.innerHTML = '';
+
+            artworks.filter(artwork => artwork.title.includes(searchTerm)).forEach((artwork, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.classList.add('gallery-item');
+
+                galleryItem.innerHTML = `
+                    <a href="details.html?id=${index}">
+                        <img src="${artwork.imageSrc}" alt="${artwork.title}">
+                        <h3>${artwork.title}</h3>
+                        <p>${artwork.priceRange}</p>
+                        <p>作者：${artwork.username}</p>
+                    </a>
+                `;
+
+                galleryContent.appendChild(galleryItem);
+            });
+
+            localStorage.removeItem('searchTerm');
+        }
+    }
 });
