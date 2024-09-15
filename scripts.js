@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             img.onload = function() {
                 // 解析度限制
-                const maxResolution = 5000; // 最大解析度（像素）
+                const maxResolution = 10000; // 最大解析度（像素）
                 if (img.width > maxResolution || img.height > maxResolution) {
-                    alert('圖片解析度過大。最大解析度為 5000x5000 像素。');
+                    alert('圖片解析度過大。最大解析度為10000X10000  像素。');
                     URL.revokeObjectURL(url);
                     return;
                 }
