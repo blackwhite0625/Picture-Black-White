@@ -17,25 +17,25 @@
   <section>
     <form id="edit-form">
       <label for="title">標題:</label>
-      <input type="text" id="title" required>
+      <input type="text" id="title">
 
       <label for="file">圖片:</label>
-      <input type="file" id="file" accept="image/*">
+      <input type="file" id="file">
 
       <label for="description">描述:</label>
-      <textarea id="description" required></textarea>
+      <textarea id="description"></textarea>
 
       <label for="min-price">委託最低價格 (TWD):</label>
-      <input type="number" id="min-price" min="50" max="10000" step="10" required>
+      <input type="number" id="min-price" min="50" max="10000" step="10">
 
       <label for="max-price">委託最高價格 (TWD):</label>
-      <input type="number" id="max-price" min="50" max="10000" step="10" required>
+      <input type="number" id="max-price" min="50" max="10000" step="10">
 
       <button type="submit">保存變更</button>
     </form>
 
-    <div id="preview">
-      <img id="preview-image" src="" alt="預覽圖片" style="max-width: 100%; height: auto;">
+    <div id="current-image">
+      <!-- 現有圖片會顯示在這裡 -->
     </div>
   </section>
 
@@ -52,52 +52,28 @@
         document.getElementById('min-price').value = artwork.priceRange.split(' ~ ')[0];
         document.getElementById('max-price').value = artwork.priceRange.split(' ~ ')[1].replace(' TWD', '');
 
-        const previewImage = document.getElementById('preview-image');
-        previewImage.src = artwork.imageSrc;
-      }
 
-      document.getElementById('file').addEventListener('change', function () {
-        const file = this.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            const previewImage = document.getElementById('preview-image');
-            previewImage.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      }
 
       document.getElementById('edit-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const title = document.getElementById('title').value.trim();
-        const fileInput = document.getElementById('file');
-        const description = document.getElementById('description').value.trim();
-        const minPrice = parseInt(document.getElementById('min-price').value, 10);
-        const maxPrice = parseInt(document.getElementById('max-price').value, 10);
+        // 更新 artwork 對象
+        artwork.title = document.getElementById('title').value;
+        artwork.description = document.getElementById('description').value;
+        artwork.priceRange = `${document.getElementById('min-price').value} ~ ${document.getElementById('max-price').value} TWD`;
 
-        if (isNaN(minPrice) || isNaN(maxPrice) || minPrice < 50 || maxPrice > 10000 || minPrice >= maxPrice) {
-          alert("請確認價格範圍正確（最低價需小於最高價，且範圍需在 50 至 10000 之間）");
-          return;
-        }
-
-        if (fileInput.files[0]) {
-          const file = fileInput.files[0];
+        // 處理圖片上傳
+        const fileInput = document.getElementById('file').files[0];
+        if (fileInput) {
           const reader = new FileReader();
-
           reader.onload = function (e) {
-            const imageSrc = e.target.result;
-            artwork.title = title;
-            artwork.imageSrc = imageSrc;
-            artwork.description = description;
-            artwork.priceRange = `${minPrice} ~ ${maxPrice} TWD`;
+            artwork.imageSrc = e.target.result;
 
             // 更新 localStorage
             artworks[id] = artwork;
             localStorage.setItem('artworks', JSON.stringify(artworks));
-
-            window.location.href = 'studio.html'; // 重新導向到 studio.html
+            window.location.href = 'studio.html'; // 保存後返回工作室
           };
 
           reader.onerror = function (error) {
@@ -105,17 +81,12 @@
             alert('文件讀取錯誤，請重試。');
           };
 
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(fileInput);
         } else {
-          artwork.title = title;
-          artwork.description = description;
-          artwork.priceRange = `${minPrice} ~ ${maxPrice} TWD`;
-
-          // 更新 localStorage
+          // 如果沒有新圖片，僅更新其他資訊
           artworks[id] = artwork;
           localStorage.setItem('artworks', JSON.stringify(artworks));
-
-          window.location.href = 'studio.html'; // 重新導向到 studio.html
+          window.location.href = 'studio.html'; // 保存後返回工作室
         }
       });
     });
